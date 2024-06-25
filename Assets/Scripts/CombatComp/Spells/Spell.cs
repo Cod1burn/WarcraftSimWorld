@@ -17,8 +17,10 @@ namespace CombatComp.Spells
         public float ChannelTick;
         
         public Unit Caster;
-        
-        public Unit Target;
+
+        public int MaxTargets;
+
+        public List<Unit> Targets;
         
         public float Cooldown;
 
@@ -32,10 +34,10 @@ namespace CombatComp.Spells
 
         public float Resource;
         
-        public virtual void StartCast(Unit caster, Unit target)
+        public virtual void StartCast(Unit caster, List<Unit> targets)
         {
             Caster = caster;
-            Target = target;
+            Targets = targets;
         }
 
         public virtual void OnCast()

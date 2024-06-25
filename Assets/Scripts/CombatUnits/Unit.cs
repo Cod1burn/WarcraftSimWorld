@@ -22,7 +22,11 @@ namespace CombatUnits
         
         public float resource;
 
+        public float maxResource;
+
         public float resourceRegen;
+
+        public string resourceType;
 
         public float armor;
 
@@ -58,6 +62,8 @@ namespace CombatUnits
         public float versat;
         
         // Weapon Stats
+        public bool isMelee;
+
         public float mainHandDmg;
         
         public float mainHandInterval;
@@ -94,6 +100,22 @@ namespace CombatUnits
         // Update is called once per frame
         void FixedUpdate()
         {
+            // Spell Casting
+            if(CastingSpell != null)
+            {
+                if (castTimer > 0.0f)
+                {
+                    castTimer -= Time.deltaTime;
+                    if (castTimer <= 0.0f)
+                    {
+                        CastingSpell.OnCast();
+                        castTimer = 0.0f;
+                        CastingSpell = null;
+                    }
+                }
+            }
+
+            // Spell Cooldowns
             foreach (Spell spell in SpellBook)
             {
                 if (spell.Cooldown > 0.0f && spell.CdTimer > 0.0f)
@@ -105,6 +127,12 @@ namespace CombatUnits
                 }
             }
             
+            // Regeneration
+
+            health = Math.Clamp(health + healthRegen * Time.deltaTime, 0.0f, maxHealth);
+            resource = Math.Clamp(resource + resourceRegen * Time.deltaTime, 0.0f, maxResource);
+            
+            // Aura Updates
             foreach (Aura aura in Auras)
             {
                 if (aura.Expired)
@@ -123,6 +151,18 @@ namespace CombatUnits
             
             health = Math.Clamp(health - finalDamage, 0.0f, maxHealth);
             DamageEvent de = new DamageEvent(damage, this, finalDamage);
+        }
+
+        public void CastSpell(Spell spell, List<Unit> targets) {
+            if (spell.CdTimer > 0.0f) return;
+
+            CastingSpell = spell;
+            castTimer = spell.CastTime * (1.0f / (1.0f + haste));
+            spell.StartCast(this, targets);
+        }
+
+        public void AutoAttack(Unit target) {
+            
         }
         
     }
