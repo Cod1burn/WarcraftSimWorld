@@ -69,15 +69,21 @@ namespace CombatUnits
         public float mainHandInterval;
         
         public float mainHandSpeed;
+
+        public float mainHandTimer;
         
         public float offHandDmg;
 
         public float offHandInterval;
 
         public float offHandSpeed;
+
+        public float offHandTimer;
         
         // Condition
         public List<Aura> Auras;
+
+        public Unit unitTarget;
         
         // Spells
         public List<Spell> SpellBook;
@@ -115,6 +121,21 @@ namespace CombatUnits
                 }
             }
 
+            // Auto Attack
+            if (isMelee)
+            {
+                // Mainhand
+                if (mainHandTimer > 0.0f) mainHandTimer -= Time.deltaTime;
+                if (offHandTimer > 0.0f) offHandTimer -= Time.deltaTime;
+                if (unitTarget != null) 
+                {
+                    if (mainHandTimer <= 0.0f)
+                    {
+                        
+                    }
+                }
+            }
+
             // Spell Cooldowns
             foreach (Spell spell in SpellBook)
             {
@@ -128,7 +149,6 @@ namespace CombatUnits
             }
             
             // Regeneration
-
             health = Math.Clamp(health + healthRegen * Time.deltaTime, 0.0f, maxHealth);
             resource = Math.Clamp(resource + resourceRegen * Time.deltaTime, 0.0f, maxResource);
             
@@ -160,10 +180,5 @@ namespace CombatUnits
             castTimer = spell.CastTime * (1.0f / (1.0f + haste));
             spell.StartCast(this, targets);
         }
-
-        public void AutoAttack(Unit target) {
-            
-        }
-        
     }
 }
