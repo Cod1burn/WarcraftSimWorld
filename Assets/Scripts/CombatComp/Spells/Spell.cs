@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using CombatUnits;
 
 namespace CombatComp.Spells

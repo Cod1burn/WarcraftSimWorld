@@ -127,7 +127,7 @@ namespace CombatUnits
                 // Mainhand
                 if (mainHandTimer > 0.0f) mainHandTimer -= Time.deltaTime;
                 if (offHandTimer > 0.0f) offHandTimer -= Time.deltaTime;
-                if (unitTarget != null) 
+                if (unitTarget) 
                 {
                     if (mainHandTimer <= 0.0f)
                     {
