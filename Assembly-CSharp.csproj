@@ -50,12 +50,13 @@
      <Compile Include="Assets/Scripts/EventManager.cs" />
      <Compile Include="Assets/Scripts/CombatUnits/Unit.cs" />
      <Compile Include="Assets/Scripts/CombatComp/Spells/OffhandAttack.cs" />
+     <Compile Include="Assets/Scripts/CombatComp/Spells/SpellModifier.cs" />
+     <Compile Include="Assets\Scripts\CombatUnits\Techie.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets/Scripts" />
      <Folder Include="Assets/Scripts/CombatComp" />
      <Folder Include="Assets/Scenes" />
      <Folder Include="Assets/Scripts/CombatComp/Spells" />
-     <Folder Include="Assets/Scripts/CombatUnits" />
      <Folder Include="Assets/Scripts/CombatComp/Events" />
      <Reference Include="UnityEngine">
      <HintPath>/Applications/Unity/Hub/Editor/2021.3.24f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>

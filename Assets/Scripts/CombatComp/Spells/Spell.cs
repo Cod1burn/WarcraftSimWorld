@@ -7,6 +7,8 @@ namespace CombatComp.Spells
     {
         public string Name;
 
+        public static int SpellID;
+
         public string Description;
         
         public bool Channeling;
@@ -34,6 +36,10 @@ namespace CombatComp.Spells
         public bool GlobalCooldown;
 
         public float Resource;
+
+        public SpellModifier[] Modifiers;
+
+        public Dictionary<string, float> Values;
         
         public virtual void StartCast(Unit caster, List<Unit> targets)
         {
@@ -43,7 +49,8 @@ namespace CombatComp.Spells
 
         public virtual void OnCast()
         {
-            
+            foreach (var modifier in Modifiers)
+                modifier.OnCast();
         }
 
         public virtual void OnChannelTick()

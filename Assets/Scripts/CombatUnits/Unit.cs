@@ -97,14 +97,14 @@ namespace CombatUnits
         public float gcdTimer;
         
         // Start is called before the first frame update
-        void Awake()
+        protected void Awake()
         {
             Auras = new List<Aura>();
             SpellBook = new List<Spell>();
         }
 
         // Update is called once per frame
-        void FixedUpdate()
+        protected void FixedUpdate()
         {
             // Spell Casting
             if(CastingSpell != null)
@@ -121,19 +121,11 @@ namespace CombatUnits
                 }
             }
 
-            // Auto Attack
+            // Auto Attack Timer
             if (isMelee)
             {
-                // Mainhand
                 if (mainHandTimer > 0.0f) mainHandTimer -= Time.deltaTime;
                 if (offHandTimer > 0.0f) offHandTimer -= Time.deltaTime;
-                if (unitTarget) 
-                {
-                    if (mainHandTimer <= 0.0f)
-                    {
-                        
-                    }
-                }
             }
 
             // Spell Cooldowns
@@ -147,6 +139,9 @@ namespace CombatUnits
                         spell.Update(Time.deltaTime * spell.CdRate);
                 }
             }
+            
+            // Global Cooldown
+            if (gcdTimer > 0.0f) gcdTimer -= Time.deltaTime;
             
             // Regeneration
             health = Math.Clamp(health + healthRegen * Time.deltaTime, 0.0f, maxHealth);
@@ -168,6 +163,20 @@ namespace CombatUnits
             float finalDamage = damage.RawDamage * dmgTakenMultiplier;
             if (damage.DamageType == DamageType.Physical) finalDamage *= 1.0f - physicalResist;
             else if (damage.DamageType != DamageType.Chaos) finalDamage *= 1.0f - magicalResist;
+
+            foreach (Aura aura in Auras)
+            {
+                if (aura.Tags.Contains(AuraTag.DamageTaken))
+                    damage = aura.OnTakeDamage(damage);
+            }
+            
+            foreach (Aura aura in Auras)
+            {
+                if (aura.Tags.Contains(AuraTag.DamageAbsorb))
+                    damage = aura.OnTakeDamage(damage);
+            }
+            
+            
             
             health = Math.Clamp(health - finalDamage, 0.0f, maxHealth);
             DamageEvent de = new DamageEvent(damage, this, finalDamage);

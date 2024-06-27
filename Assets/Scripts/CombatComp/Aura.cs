@@ -5,6 +5,20 @@ using CombatUnits;
 
 namespace CombatComp
 {
+    public enum AuraTag
+    {
+        DoT,
+        HoT,
+        StatChange,
+        SpellModifier,
+        DamageTaken,
+        DamageDealt,
+        DamageAbsorb,
+        HealingTaken,
+        HealingDealt,
+        HealingAbsorb
+    }
+    
     public class Aura
     {
         public string AuraName;
@@ -30,16 +44,17 @@ namespace CombatComp
         public int Stack;
 
         public int MaxStacks;
-
-        public int ValueNum;
-
-        public float[] Values;
+        
+        public Dictionary<string, float> Values;
 
         public bool Expired;
 
+        public List<AuraTag> Tags;
+
         public Aura()
         {
-            
+            Values = new Dictionary<string, float>();
+            Tags = new List<AuraTag>();
         }
         
         public virtual void OnApply(Unit caster, Unit owner)
@@ -71,6 +86,17 @@ namespace CombatComp
         {
             
         }
+        
+        public virtual Damage OnTakeDamage(Damage damage)
+        {
+            return damage;
+        }
+        
+        public virtual Damage OnDealDamage(Damage damage)
+        {
+            return damage;
+        }
+        
 
         // For effect such as stat increase or decrease
         public virtual void OnExpire()

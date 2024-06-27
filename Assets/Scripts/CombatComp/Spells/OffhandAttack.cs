@@ -7,6 +7,7 @@ namespace CombatComp.Spells
             Name = "Offhand Attack";
             Description = "Attack the target with offhand weapon.";
             CastTime = 0.0f;
+            SpellID = 2;
         }
 
         public override void OnCast()

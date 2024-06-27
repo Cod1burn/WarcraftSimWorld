@@ -7,6 +7,7 @@ namespace CombatComp.Spells
             Name = "Auto Attack";
             Description = "Attack the target with weapons.";
             CastTime = 0.0f;
+            SpellID = 1;
         }
 
         public override void OnCast()

@@ -6,11 +6,23 @@ public class EventManager : MonoBehaviour
 {
     // Singleton Pattern
     public static EventManager Instance { get; private set; }
-
+    
     void Awake()
     {
         Instance = this;
     }
+
+    void StartCombat()
+    {
+        
+    }
+
+    void EndCombat()
+    {
+        
+    }
+    
+    
     
     
 }
