@@ -1,4 +1,6 @@
 # Default ignored files
+# Idea files
+/.idea/
 /shelf/
 /workspace.xml
 # Rider ignored files
