@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using CombatComp;
 using CombatComp.Events;
@@ -160,24 +161,15 @@ namespace CombatUnits
 
         public void TakeDamage(Damage damage)
         {
-            float finalDamage = damage.RawDamage * dmgTakenMultiplier;
+            var finalDamage = damage.RawDamage * dmgTakenMultiplier;
             if (damage.DamageType == DamageType.Physical) finalDamage *= 1.0f - physicalResist;
             else if (damage.DamageType != DamageType.Chaos) finalDamage *= 1.0f - magicalResist;
 
-            foreach (Aura aura in Auras)
-            {
-                if (aura.Tags.Contains(AuraTag.DamageTaken))
-                    damage = aura.OnTakeDamage(damage);
-            }
-            
-            foreach (Aura aura in Auras)
-            {
-                if (aura.Tags.Contains(AuraTag.DamageAbsorb))
-                    damage = aura.OnTakeDamage(damage);
-            }
-            
-            
-            
+            damage = Auras.Where(aura => aura.Tags.Contains(AuraTag.DamageTaken)).Aggregate(damage, (current, aura) => aura.OnTakeDamage(current));
+
+            damage = Auras.Where(aura => aura.Tags.Contains(AuraTag.DamageAbsorb)).Aggregate(damage, (current, aura) => aura.OnTakeDamage(current));
+
+
             health = Math.Clamp(health - finalDamage, 0.0f, maxHealth);
             DamageEvent de = new DamageEvent(damage, this, finalDamage);
         }
