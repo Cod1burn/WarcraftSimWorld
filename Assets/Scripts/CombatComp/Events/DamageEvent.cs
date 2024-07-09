@@ -1,8 +1,9 @@
+using UnityEngine;
 using CombatUnits;
 
 namespace CombatComp.Events
 {
-    public class DamageEvent : Event
+    public class DamageEvent : CombatEvent
     {
         public Damage Damage;
 

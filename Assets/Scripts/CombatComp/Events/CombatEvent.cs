@@ -10,7 +10,7 @@ namespace CombatComp.Events
         AuraEvent
     }
     
-    public class Event
+    public class CombatEvent
     {
         public EventType Type;
 
