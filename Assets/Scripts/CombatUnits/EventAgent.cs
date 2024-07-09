@@ -1,10 +1,10 @@
-using CombatComp.Events;
-using CombatComp;
+using WorldOfSim.CombatComp.Events;
+using WorldOfSim.CombatComp;
 using System.Collections.Generic;
 using System.Linq;
 using System;
 
-namespace CombatUnits{
+namespace WorldOfSim.CombatUnits{
     public sealed class EventAgent
     {
         Unit _unit;

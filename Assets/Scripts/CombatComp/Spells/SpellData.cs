@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 using System.IO;
 using UnityEngine;
 
-namespace CombatComp.Spells
+namespace WorldOfSim.CombatComp.Spells
 {
     [Serializable]
     public class SpellValuePair<TKey, TValue>
@@ -56,7 +56,17 @@ namespace CombatComp.Spells
         [XmlArray("valuePairs")]
         [XmlElement("pair")]
         public List<SpellValuePair<string, float>> ValuePairs;
+        
 
+        /// <summary>
+        /// Naming logic of keys in Values:
+        /// Attack Power Multiplier: AP1, AP2, AP3, ...
+        /// Spell Power Multiplier: SP1, SP2, SP3, ...
+        /// Duration related value: DR1, DR2, DR3, ...
+        /// Probability related value: PR1, PR2, PR3, ...
+        /// Other values: V1, V2, V3, ...
+        /// The numbers are based on the order appearing in the description
+        /// </summary>
         [XmlIgnore]
         public Dictionary<string, float> Values;
 

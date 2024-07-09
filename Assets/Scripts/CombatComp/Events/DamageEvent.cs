@@ -1,8 +1,8 @@
 using UnityEngine;
-using CombatUnits;
-using CombatComp.Spells;
+using WorldOfSim.CombatUnits;
+using WorldOfSim.CombatComp.Spells;
 
-namespace CombatComp.Events
+namespace WorldOfSim.CombatComp.Events
 {
     public enum DamageType
     {

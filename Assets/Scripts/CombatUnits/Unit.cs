@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using CombatComp;
-using CombatComp.Events;
-using CombatComp.Spells;
+using WorldOfSim.CombatComp;
+using WorldOfSim.CombatComp.Events;
+using WorldOfSim.CombatComp.Spells;
 using UnityEngine;
 
-namespace CombatUnits
+namespace WorldOfSim.CombatUnits
 {
     public class Unit : MonoBehaviour
     {

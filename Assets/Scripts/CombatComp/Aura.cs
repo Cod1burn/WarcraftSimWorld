@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using CombatUnits;
-using CombatComp.Events;
+using WorldOfSim.CombatUnits;
+using WorldOfSim.CombatComp.Events;
 
-namespace CombatComp
+namespace WorldOfSim.CombatComp
 {
     public enum AuraTag
     {

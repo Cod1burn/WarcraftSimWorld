@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using CombatUnits;
+using WorldOfSim.CombatUnits;
 
-namespace CombatComp.Spells
+namespace WorldOfSim.CombatComp.Spells
 {
     public class SpellBase<TSpell> where TSpell : class, new ()
     {

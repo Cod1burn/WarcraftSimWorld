@@ -1,4 +1,4 @@
-namespace CombatUnits
+namespace WorldOfSim.CombatUnits
 {
     public class Techie : Unit
     {

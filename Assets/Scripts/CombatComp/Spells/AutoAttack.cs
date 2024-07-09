@@ -1,9 +1,9 @@
-using CombatComp.Events;
+using WorldOfSim.CombatComp.Events;
 
-namespace CombatComp.Spells
+namespace WorldOfSim.CombatComp.Spells
 {
     public class AutoAttack : SpellBase<AutoAttack>
     {
-        
+
     }
 }

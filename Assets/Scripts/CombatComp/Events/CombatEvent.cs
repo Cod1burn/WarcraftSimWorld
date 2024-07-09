@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CombatComp.Events
+namespace WorldOfSim.CombatComp.Events
 {
     public enum EventType
     {

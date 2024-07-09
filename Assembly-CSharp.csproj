@@ -65,7 +65,6 @@
     <Compile Include="Assets/Scripts/CombatComp/Events/DamageEvent.cs" />
     <Compile Include="Assets/Scripts/CombatComp/Aura.cs" />
     <Compile Include="Assets/Scripts/CombatComp/Events/CombatEvent.cs" />
-    <Compile Include="Assets/Scripts/CombatComp/Spells/SpellModifier.cs" />
     <Compile Include="Assets/Scripts/CombatUnits/Techie.cs" />
     <Compile Include="Assets/Scripts/CombatComp/Spells/AutoAttack.cs" />
     <Compile Include="Assets/Scripts/CombatUnits/EventAgent.cs" />
@@ -75,6 +74,10 @@
     <Compile Include="Assets/Scripts/CombatUnits/Unit.cs" />
     <Compile Include="Assets/Scripts/CombatComp/Spells/SpellData.cs" />
     <Compile Include="Assets/Scripts/CombatComp/Spells/SpellBase.cs" />
+    <Compile Include="Assets/Scripts/Server/SpellLibrary.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets/Data/SpellData/AutoAttack.xml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
