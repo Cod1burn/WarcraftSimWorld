@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using Utils;
 
 namespace Utils
@@ -17,18 +18,23 @@ namespace Utils
 
     public class CombatLog
     {
-        Time timestamp;
+        // Timestamp of the log
+        DateTime timestamp;
+        long tickNo;
         string message;
         LogType type;
         public CombatLog(LogType type, string message)
         {
+            // Get the system time
+            timestamp = DateTime.Now;
+            tickNo = CombatLogManager.Instance.tickNo;
             this.type = type;
             this.message = message;
         }
 
-        public string ToString()
+        public override string ToString()
         {
-            return $"{timestamp}[{type}]: {message}";
+            return $"{timestamp}({tickNo})[{type}]: {message}";
         }
         
     }

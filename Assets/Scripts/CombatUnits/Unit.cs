@@ -87,39 +87,33 @@ namespace CombatUnits
         public Unit unitTarget;
         
         // Spells
-        public List<Spell> SpellBook;
+        public List<int> SpellBook;
         
-        public Spell CastingSpell;
+        public int CastingSpell;
 
         public float castTimer;
         
         public float globalCooldown;
         
         public float gcdTimer;
+
+        // CombatEvents
+        public EventAgent agent {get; private set;}
         
         // Start is called before the first frame update
         protected void Awake()
         {
             Auras = new List<Aura>();
-            SpellBook = new List<Spell>();
+            SpellBook = new List<int>();
+            agent = new EventAgent(this);
         }
 
         // Update is called once per frame
         protected void FixedUpdate()
         {
             // Spell Casting
-            if(CastingSpell != null)
+            if(CastingSpell > 0)
             {
-                if (castTimer > 0.0f)
-                {
-                    castTimer -= Time.deltaTime;
-                    if (castTimer <= 0.0f)
-                    {
-                        CastingSpell.OnCast();
-                        castTimer = 0.0f;
-                        CastingSpell = null;
-                    }
-                }
             }
 
             // Auto Attack Timer
@@ -130,16 +124,7 @@ namespace CombatUnits
             }
 
             // Spell Cooldowns
-            foreach (Spell spell in SpellBook)
-            {
-                if (spell.Cooldown > 0.0f && spell.CdTimer > 0.0f)
-                {
-                    if (spell.HasteCooldown)
-                        spell.Update(Time.deltaTime * (1.0f + haste) * spell.CdRate);
-                    else
-                        spell.Update(Time.deltaTime * spell.CdRate);
-                }
-            }
+            
             
             // Global Cooldown
             if (gcdTimer > 0.0f) gcdTimer -= Time.deltaTime;
@@ -159,27 +144,9 @@ namespace CombatUnits
             Auras.RemoveAll(a => a.Expired);
         }
 
-        public void TakeDamage(Damage damage)
+        public void HealthChange(float amount)
         {
-            var finalDamage = damage.RawDamage * dmgTakenMultiplier;
-            if (damage.DamageType == DamageType.Physical) finalDamage *= 1.0f - physicalResist;
-            else if (damage.DamageType != DamageType.Chaos) finalDamage *= 1.0f - magicalResist;
-
-            damage = Auras.Where(aura => aura.Tags.Contains(AuraTag.DamageTaken)).Aggregate(damage, (current, aura) => aura.OnTakeDamage(current));
-
-            damage = Auras.Where(aura => aura.Tags.Contains(AuraTag.DamageAbsorb)).Aggregate(damage, (current, aura) => aura.OnTakeDamage(current));
-
-
-            health = Math.Clamp(health - finalDamage, 0.0f, maxHealth);
-            DamageEvent de = new DamageEvent(damage, this, finalDamage);
-        }
-
-        public void CastSpell(Spell spell, List<Unit> targets) {
-            if (spell.CdTimer > 0.0f) return;
-
-            CastingSpell = spell;
-            castTimer = spell.CastTime * (1.0f / (1.0f + haste));
-            spell.StartCast(this, targets);
+            health = Math.Clamp(health + amount, 0.0f, maxHealth);
         }
     }
 }

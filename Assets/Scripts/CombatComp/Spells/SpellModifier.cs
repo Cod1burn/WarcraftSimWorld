@@ -11,12 +11,12 @@ namespace CombatComp.Spells
 
         public string Description;
 
-        public Spell Spell;
+        public BaseSpell Spell;
 
         public SpellModifier()
         { }
 
-        public virtual void OnApply(Spell spell)
+        public virtual void OnApply(BaseSpell spell)
         {
             Spell = spell;
         }

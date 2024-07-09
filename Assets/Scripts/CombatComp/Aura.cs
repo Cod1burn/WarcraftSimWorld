@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CombatUnits;
+using CombatComp.Events;
 
 namespace CombatComp
 {
@@ -59,8 +60,8 @@ namespace CombatComp
         
         public virtual void OnApply(Unit caster, Unit owner)
         {
-            caster = caster;
-            owner = owner;
+            Caster = caster;
+            Owner = owner;
             Timer = 0.0f;
             TickTimer = 0.0f;
             Expired = false;
@@ -87,12 +88,12 @@ namespace CombatComp
             
         }
         
-        public virtual Damage OnTakeDamage(Damage damage)
+        public virtual DamageEvent OnDamageTaken(DamageEvent damage)
         {
             return damage;
         }
         
-        public virtual Damage OnDealDamage(Damage damage)
+        public virtual DamageEvent OnDamageDealt(DamageEvent damage)
         {
             return damage;
         }

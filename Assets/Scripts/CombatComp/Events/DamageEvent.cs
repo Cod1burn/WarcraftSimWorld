@@ -1,27 +1,48 @@
 using UnityEngine;
 using CombatUnits;
+using CombatComp.Spells;
 
 namespace CombatComp.Events
 {
+    public enum DamageType
+    {
+        Physical,
+        Fire,
+        Frost,
+        Arcane,
+        Shadow,
+        Natural,
+        Lightning,
+        Holy,
+        Necrotic,
+        Chaos
+    }
+
     public class DamageEvent : CombatEvent
     {
-        public Damage Damage;
+        public Unit Caster;
 
+        public readonly float RawDamage;
+
+        public float damage;
+
+        public DamageType DamageType;
+
+        public string SpellName;
+
+        public int SpellID;
+        
         public Unit Target;
         
-        public float FinalDamage;
-        
-        public DamageEvent(Damage damage, Unit target, float finalDamage)
+        public DamageEvent(Unit caster, float damage, DamageType type, string spellName, int spellId, Unit target)
         {
             Type = EventType.DamageEvent;
-            Damage = damage;
+            RawDamage = damage;
+            damage = RawDamage;
+            DamageType = type;
+            SpellName = spellName;
+            SpellID = spellId;
             Target = target;
-            FinalDamage = finalDamage;
-        }
-        
-        public override string EventString()
-        {
-            return $"{TimeStamp}: {Damage.Caster.unitName} dealt {FinalDamage} ({Damage.RawDamage}) {Damage.DamageType} damage to {Target.unitName} by {Damage.Spell.Name}";
         }
     }
 }

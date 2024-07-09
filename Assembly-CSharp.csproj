@@ -62,12 +62,10 @@
     <Analyzer Include="/Users/yiranjing/.vscode/extensions/visualstudiotoolsforunity.vstuc-1.0.2/Analyzers/Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets/Scripts/CombatComp/Damage.cs" />
     <Compile Include="Assets/Scripts/CombatComp/Events/DamageEvent.cs" />
     <Compile Include="Assets/Scripts/CombatComp/Aura.cs" />
     <Compile Include="Assets/Scripts/CombatComp/Events/CombatEvent.cs" />
     <Compile Include="Assets/Scripts/CombatComp/Spells/SpellModifier.cs" />
-    <Compile Include="Assets/Scripts/CombatComp/Spells/Spell.cs" />
     <Compile Include="Assets/Scripts/CombatUnits/Techie.cs" />
     <Compile Include="Assets/Scripts/CombatComp/Spells/AutoAttack.cs" />
     <Compile Include="Assets/Scripts/CombatUnits/EventAgent.cs" />
@@ -75,6 +73,8 @@
     <Compile Include="Assets/Scripts/CombatComp/Spells/OffhandAttack.cs" />
     <Compile Include="Assets/Scripts/Utils/CombatLogManager.cs" />
     <Compile Include="Assets/Scripts/CombatUnits/Unit.cs" />
+    <Compile Include="Assets/Scripts/CombatComp/Spells/SpellData.cs" />
+    <Compile Include="Assets/Scripts/CombatComp/Spells/SpellBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
