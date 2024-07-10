@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spell code = "Offhand Attack">
+    <id>1</id>
+    <name>Offhand Attack</name>
+    <description>Attack the target enemy using your off hand weapon with reduced attack speed.</description>
+    <castTime>0.0</castTime>
+    <channelTime>0.0</channelTime>
+    <channelTick>0.0</channelTick>
+    <targets>1</targets>
+    <cooldown>1.5</cooldown>
+    <isHasteCd>true</isHasteCd>
+    <isGCd>false</isGCd>
+    <cost>0.0</cost>
+    <valuePairs>
+        <pair>
+            <key>AP1</key>
+            <value>1.0</value>
+        </pair>
+    </valuePairs>
+</spell>

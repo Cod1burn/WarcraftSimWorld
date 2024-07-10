@@ -75,8 +75,10 @@
     <Compile Include="Assets/Scripts/CombatComp/Spells/SpellData.cs" />
     <Compile Include="Assets/Scripts/CombatComp/Spells/SpellBase.cs" />
     <Compile Include="Assets/Scripts/Server/SpellLibrary.cs" />
+    <Compile Include="Assets/Scripts/CombatComp/Events/SpellCastEvent.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets/Data/SpellData/OffhandAttack.xml" />
     <None Include="Assets/Data/SpellData/AutoAttack.xml" />
   </ItemGroup>
   <ItemGroup>
