@@ -24,7 +24,7 @@ namespace WorldOfSim.CombatComp.Events
 
         public readonly float RawDamage;
 
-        public float damage;
+        public float Damage;
 
         public DamageType DamageType;
 
@@ -37,8 +37,8 @@ namespace WorldOfSim.CombatComp.Events
         public DamageEvent(Unit caster, float damage, DamageType type, string spellName, int spellId, Unit target)
         {
             Type = EventType.DamageEvent;
-            RawDamage = damage;
-            damage = RawDamage;
+            RawDamage = Damage;
+            Damage = RawDamage;
             DamageType = type;
             SpellName = spellName;
             SpellID = spellId;

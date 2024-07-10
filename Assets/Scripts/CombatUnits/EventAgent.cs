@@ -30,18 +30,18 @@ namespace WorldOfSim.CombatUnits{
 
         public void ProcessDamage(DamageEvent cevent)
         {
-            cevent.damage *= _unit.dmgTakenMultiplier;
+            cevent.Damage *= _unit.dmgTakenMultiplier;
             switch(cevent.DamageType)
             {
                 case DamageType.Physical:
-                    cevent.damage *= 1 - _unit.physicalResist;
+                    cevent.Damage *= 1 - _unit.physicalResist;
                     break;
                 
                 case DamageType.Chaos:
                     break;
 
                 default:
-                    cevent.damage *= 1 - _unit.magicalResist;
+                    cevent.Damage *= 1 - _unit.magicalResist;
                     break;
             }
 
@@ -49,18 +49,18 @@ namespace WorldOfSim.CombatUnits{
             foreach(var a in _unit.Auras.Where(a => a.Tags.Contains(AuraTag.DamageAbsorb)))
             {
                 cevent = a.OnDamageTaken(cevent);
-                if (cevent.damage <= 0)
+                if (cevent.Damage <= 0)
                     break;
             }
             // If the damage is not fully absorbed, check damage taken trigger auras
-            if (cevent.damage > 0)
+            if (cevent.Damage > 0)
                 cevent = _unit.Auras.Where(a => a.Tags.Contains(AuraTag.DamageTaken)).Aggregate(cevent, (current, a) => a.OnDamageTaken(current));
             
-            if (cevent.damage > 0)
-                _unit.HealthChange(-cevent.damage);
+            if (cevent.Damage > 0)
+                _unit.HealthChange(-cevent.Damage);
             
             // Generate Log
-            string message = $"{cevent.Caster.unitName} dealt {cevent.damage} ({cevent.RawDamage}) {cevent.DamageType} damage to {_unit.unitName} with {cevent.SpellName}({cevent.SpellID}).";
+            string message = $"{cevent.Caster.unitName} dealt {cevent.Damage} ({cevent.RawDamage}) {cevent.DamageType} damage to {_unit.unitName} with {cevent.SpellName}({cevent.SpellID}).";
         }
 
     }
