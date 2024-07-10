@@ -1,6 +1,9 @@
 using UnityEngine;
+using System;
+using System.Reflection;
 using System.Collections.Generic;
 using WorldOfSim.CombatComp.Spells;
+using System.Data.Common;
 
 namespace WorldOfSim.Server
 {   
@@ -15,6 +18,7 @@ namespace WorldOfSim.Server
         {
             Instance = this;
             library = new Dictionary<int, SpellBase<object>>();
+            InitializeSpells();
         }   
 
         void InitializeSpells()
@@ -25,8 +29,21 @@ namespace WorldOfSim.Server
 
             foreach (string spellFile in spellFiles)
             {
-                string spellFileName = System.IO.Path.GetFileNameWithoutExtension(spellFile);
-                // TODO: string name to class name
+                if (System.IO.Path.GetExtension(spellFile) != ".xml")
+                {
+                    continue;
+                }
+                string spellName = System.IO.Path.GetFileNameWithoutExtension(spellFile);
+                string assemblyName = "WorldOfSim.CombatComp.Spells.";
+                string spellClassName = assemblyName + spellName;
+                object instance = Activator.CreateInstance(Type.GetType(spellClassName));
+                if (instance != null)
+                {
+                    SpellBase<object> spell = instance as SpellBase<object>;
+                    SpellData spellData = SpellData.Load(spellFile);
+                    spell.Data = spellData;
+                    library.Add(spell.Data.SpellID, spell);
+                }            
             }
 
         }
