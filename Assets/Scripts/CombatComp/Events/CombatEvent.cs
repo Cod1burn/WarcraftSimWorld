@@ -6,19 +6,14 @@ namespace WorldOfSim.CombatComp.Events
     {
         DamageEvent,
         HealEvent,
-        SpellEvent,
-        AuraEvent
+        SpellCastEvent,
+        SpellTakenEvent,
+        AuraAppliedEvent,
+        AuraRemovedEvent,
     }
     
     public class CombatEvent
     {
         public EventType Type;
-
-        public Time TimeStamp;
-
-        public virtual string EventString()
-        {
-            return "";
-        }
     }
 }
